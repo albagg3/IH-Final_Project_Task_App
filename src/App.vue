@@ -1,5 +1,5 @@
 <template>
-  <h1>TASK APP</h1>
+  <!-- <h1>TASK APP</h1>
   <ul>
     <li>
       <router-link :to="{name:'home'}">Home</router-link>
@@ -7,15 +7,28 @@
     <li>
       <router-link :to="{name:'login'}">Login</router-link>
     </li>
-  </ul>
+  </ul> -->
   <router-view></router-view>
 </template>
 <script setup>
-import {createClient} from '@supabase/supabase-js'
+import {onMounted} from 'vue'
+import{login, newTask} from './api'
 
-const supabase = createClient(import.meta.env.VITE_SUPABASE_URL, import.meta.env.VITE_SUPABASE_KEY)
-console.log(supabase)
-console.log(process.env.NODE_ENV, import.meta.env.BASE_URL)
+
+
+onMounted(async () => {
+  const id = await login('garciagonzalezalba@gmail.com', '1234567');
+  newTask({
+    user_id: id,
+    title: 'Titulo',
+    description: 'Descripcion del task'
+
+  })
+
+
+});
+
 </script>
 <style scoped>
+
 </style>

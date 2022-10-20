@@ -21,8 +21,20 @@ export const useAuthStore = defineStore('auth', {
             this.email= email;
             this.id = id
         },
-        logOut(){
+        logout(){
+            this.isAuth = false;
+            this.email= undefined;
+            this.id = undefined;
             //TODO cambiar el estado de autenticacion e id del usuario es decir el isAuth a false y el id a undefined
         }
-    }
+    },
+    persist: {
+        enabled: true,
+        strategies:[
+            {
+                key: 'login',
+                storage: localStorage,
+            },
+        ],
+    },
 })

@@ -10,11 +10,18 @@
                 <label for="">Password</label>
                 <input v-model="password" class="input is-primary" type="password" placeholder="Password">
             </div>
+            <div class="p-2">
+                <label for="">Confirm password</label>
+                <input v-model="passwordConfirm" class="input is-primary" type="password" placeholder="Password">
+            </div>
             <button class="button is-primary" type="submit">Sign in</button>
-            
-            <Message v-if="hasMessage.isShow" :message="hasMessage.message" :type="hasMessage.type"/>
-            
-            
+
+            <Message v-if="hasMessage.isShow" :message="hasMessage.message" :type="hasMessage.type" />
+            <div>
+                <p>¿Ya eres miembro? <router-link :to="{name:'login'}">Log in</router-link>
+                </p>
+            </div>
+
         </form>
 
     </div>
@@ -27,6 +34,7 @@ import Message from '../components/Message.vue';
 
 const email = ref('')
 const password = ref('')
+const passwordConfirm = ref('')
 const hasMessage = ref({
     message: '',
     type: '',
@@ -34,27 +42,33 @@ const hasMessage = ref({
 })
 
 const onSubmit = async () => {
-    console.log('formulario enviado', email.value, password.value)
-    // registro(email, password);
-    const response = await registro(email.value, password.value)
-    if (response)
-    {
-        hasMessage.value.title = 'Good job'
-        hasMessage.value.message = 'Mira tu email y confirma'
-        hasMessage.value.type = 'is-success'
-        hasMessage.value.isShow = true
+    if (password.value === passwordConfirm.value) {
+        console.log('formulario enviado', email.value, password.value)
+        // registro(email, password);
+        const response = await registro(email.value, password.value)
+        if (response) {
+
+            hasMessage.value.message = 'Por favor revisa tu email y haz click en la confirmacion'
+            hasMessage.value.type = 'is-success'
+            hasMessage.value.isShow = true
+        }
+        else {
+
+            hasMessage.value.message = 'Por favor rcd evisa los datos'
+            hasMessage.value.type = 'is-danger'
+            hasMessage.value.isShow = true
+        }
     }
-    else
-    {
-        hasMessage.value.title = 'bad'
-        hasMessage.value.message = 'Revisa los datos'
+    else {
+        hasMessage.value.message = 'Confirma el password correctamente'
         hasMessage.value.type = 'is-danger'
         hasMessage.value.isShow = true
     }
+};
     //si es false el response entonces habria que enviar un mensaje de que ha habido un error email valido
     // authStore.login(email.value,id)
-    
-};
+
+
 
 
 

@@ -11,7 +11,8 @@ export const useTaskStore = defineStore('task', {
         }
     },
     actions:{
-        setTask(){
+        setTask(task){
+            this.tasks.push(task)
             //TODO guardar en el state las tasks que nos de supabase
         },
         updateTask(id, task){
@@ -28,6 +29,15 @@ export const useTaskStore = defineStore('task', {
         }
         // getFilterdtasks(){
 
-        // }
-    }
+        }
+    // },
+    // persist: {
+    //     enabled: true,
+    //     strategies:[
+    //         {
+    //             key: 'tasks',
+    //             storage: localStorage,
+    //         },
+    //     ],
+    // },
 })

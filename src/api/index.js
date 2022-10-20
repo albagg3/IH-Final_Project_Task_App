@@ -30,7 +30,9 @@ export const login = async (email, password) => {
         email: email,
         password: password
     })
-
+    if (response.error)
+        return false
+    // return response.data.user.id
     return response.data.user.id
 }
 
@@ -60,6 +62,7 @@ export const getTasks = async () => {
         .select('*')
         .order('id', { ascending: false })
     console.log(response)
+    return response.data
 
     //TODO Retornar la información de los task por ejemplo return response.data
 }
@@ -95,4 +98,7 @@ export const logOut = async () => {
     //TODO Identificar el resultado y retornar lo que nos interesa por ejemplo true si ha ido bien y false si ha fallaado
     //avisar al usuario de que has deslogueado
     console.log(response)
+    if(response.error)
+        return false
+    return true
 }

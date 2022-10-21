@@ -19,20 +19,27 @@
         <footer class="card-footer">
             <a href="#" class="card-footer-item">Done</a>
             <a href="#" class="card-footer-item">Edit</a>
-            <a @click="deleteTask" href="#" class="card-footer-item">Delete</a>
+            <a @click="deleteTaskBoard" href="#" class="card-footer-item">Delete</a>
         </footer>
     </div>
 </template>
 <script setup>
-import {}
+import {useTaskStore} from '../store/index'
+
+const taskStore = useTaskStore();
 
 const props = defineProps({
     task: Object
 });
 
-// const deleteTask = () => {
+// console.log(props.task.id)
+const deleteTaskBoard = () => {
     
-// }
+    taskStore.deleteTask(props.task.id)
+    //TODO me falta borrarlas de supabase
+    // console.log('props:',props.task)
+}
+
 
 </script>
 <style scoped>

@@ -15,8 +15,10 @@
         </form>
 
     </div>
+    <!-- is-mobile es para si en movil no vas a poner una sola columna y vas a poner 2 por ejemplo sino no haria 
+    falta ni el is-mobile ni el is-12-mobile -->
     <div class="columns is-multiline is-mobile">
-        <div  v-for="task in oldTasks" class="column is-3-desktop is-6-tablet is-12-mobile" >
+        <div  v-for="task in taskStore.tasks" class="column is-3-desktop is-6-tablet is-12-mobile" :key="task.id" >
             <Task :task="task" />
         </div>
     </div>
@@ -37,7 +39,7 @@ const task = ref({
 })
 let oldTasks = ref([])
 
-
+console.log(taskStore.tasks)
 
 const openTask = () => {
     addTask.value = true
@@ -57,13 +59,11 @@ const taskBoard = async () => {
 const addTaskBoard = async () => {
     taskStore.setTask(task.value)   //añade la task al array del store
     await newTask(task.value);            //añade la task a supabase
-    console.log(taskStore.tasks)
 }
 
 onMounted(async () => {
-
+    console.log(taskStore.tasks)
     oldTasks.value = await taskBoard();
-
 });
 
 

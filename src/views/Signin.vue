@@ -54,7 +54,7 @@ const onSubmit = async () => {
         }
         else {
 
-            hasMessage.value.message = 'Por favor rcd evisa los datos'
+            hasMessage.value.message = 'Por favor revisa los datos'
             hasMessage.value.type = 'is-danger'
             hasMessage.value.isShow = true
         }

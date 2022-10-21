@@ -33,37 +33,44 @@ const authStore = useAuthStore();
 const taskStore = useTaskStore();
 const addTask = ref(false)
 const task = ref({
+    
     user_id: authStore.id,
     title: '',
     description: ''
 })
-let oldTasks = ref([])
+
 
 console.log(taskStore.tasks)
-
+// ABRIR Y CERRAR EL INPUT PARA ESCRIBIR TAREASA
 const openTask = () => {
     addTask.value = true
-
 }
 const closeTask = () => {
     addTask.value = false
 }
 
+// LA LLAMAMOS EN EL ONMOUNTED PARA QUE NOS MUESTRE EL TABLON DE TAREAS
 //se tiene que  ejecutar cuando el componente se monte porque es el tablero con las tareas
 const taskBoard = async () => {
     const response = await getTasks();
+    taskStore.setTask(response)   //añade la task al array del store
     console.log(response)
     return response
 }
+
+//AÑADE UNA TAREA Y NOS ACTUALIZA EL TABLON DE TASKS
 //cuando clickamos en el done, nos añade la tarea al array del store y al del supabase
 const addTaskBoard = async () => {
-    taskStore.setTask(task.value)   //añade la task al array del store
     await newTask(task.value);            //añade la task a supabase
+    await taskBoard();//vuelve a pedir las tareas a supabase
 }
 
+
+
+//  NOS TIENE QUE MOSTRAR LAS TAREAS QUE SE QUEDAN GUARDADAS DE OTROS DIAS
 onMounted(async () => {
     console.log(taskStore.tasks)
-    oldTasks.value = await taskBoard();
+    await taskBoard();
 });
 
 

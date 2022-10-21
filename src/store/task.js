@@ -13,11 +13,23 @@ export const useTaskStore = defineStore('task', {
     actions: {
         setTask(task) {
             
-            this.tasks.push(task)
+            this.tasks = task 
             //TODO guardar en el state las tasks que nos de supabase
+            //como supabase no nos da el id de la task no podemos hacer un push
+            //sino que igualamos al array que nos devuelve
         },
-        updateTask(id, task) {
+        updateTask(id, taskedit) {
             // TODO modificar el estado de la task
+            const index= this.tasks.findIndex(task => task.id === id)
+            this.tasks[index] = {
+                //clonamos el objeto del array task y sobreescribimos los valores que hay en taskedit
+                ...this.tasks[index],
+                ...taskedit
+            }
+            console.log('esta aqui en el store',this.tasks[index].description)
+
+
+            
             //Encontrar el indice de la task con ese id y cambiar el contenido con task
         },
         deleteTask(id) {
@@ -35,14 +47,5 @@ export const useTaskStore = defineStore('task', {
         // getFilterdtasks(){
 
     
-    },
-    persist: {
-        enabled: true,
-        strategies:[
-            {
-                key: 'tasks',
-                storage: localStorage,
-            },
-        ],
     },
 })

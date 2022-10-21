@@ -1,7 +1,7 @@
 <template>
-    <div class="card">
+    <div v-if="!editMode" class="card">
         <header class="card-header">
-            <p class="card-header-title">
+            <p class="card-header-title ">
                 Task # {{props.task.title}}
             </p>
             <button class="card-header-icon" aria-label="more options">
@@ -18,28 +18,86 @@
         </div>
         <footer class="card-footer">
             <a href="#" class="card-footer-item">Done</a>
-            <a href="#" class="card-footer-item">Edit</a>
+            <a @click="editTaskBoard" href="#" class="card-footer-item">Edit</a>
             <a @click="deleteTaskBoard" href="#" class="card-footer-item">Delete</a>
+        </footer>
+        <Modalquestion v-if="modal.isShow" :mesagge="modal.message"/>
+    </div>
+    <div v-else>
+        <header class="card-header">
+            <input v-model="taskEdited.title" class="input is-primary">
+            <button class="card-header-icon" aria-label="more options">
+                <span class="icon">
+                    <i class="fas fa-angle-down" aria-hidden="true"></i>
+                </span>
+            </button>
+        </header>
+        <div class="card-content">
+            <input v-model="taskEdited.description" class="input is-primary">
+        </div>
+        <footer class="card-footer">
+            <a @click="doneEdit" href="#" class="card-footer-item">Done</a>
+            <a @click="cancelEdit" href="#" class="card-footer-item">Cancel</a>
         </footer>
     </div>
 </template>
 <script setup>
+import {ref} from 'vue'
 import {useTaskStore} from '../store/index'
+import {deleteTask, updateTask} from '../api/index'
+import Modalquestion from './Modalquestion.vue';
 
 const taskStore = useTaskStore();
+const editMode = ref(false);
 
 const props = defineProps({
     task: Object
 });
 
+const modal=ref( {
+    message: '¿Estás seguro?',
+    isShow:false
+})
+
+const taskEdited = ref({
+    title: props.task.title,
+    description: props.task.description
+})
+//--------------BORRAR TASKS---------------
 // console.log(props.task.id)
-const deleteTaskBoard = () => {
-    
+const deleteTaskBoard =async () => { 
+    modal.value.isShow= true;
+    console.log(modal.value.isShow)
     taskStore.deleteTask(props.task.id)
-    //TODO me falta borrarlas de supabase
-    // console.log('props:',props.task)
+    await deleteTask(props.task.id)
 }
 
+//---------------EDITAR TASKS--------------
+
+const editTaskBoard = () => {
+    editMode.value= true;
+}
+
+const cancelEdit = async () =>{
+    editMode.value= false;
+    taskEdited.value.title= props.task.title
+    taskEdited.value.description = props.task.description
+    //se puede escribir también como está debajo
+    // taskEdited.value = {
+    //     title: props.task.title,
+    //     description: props.task.description
+    // }
+    // await updateTask(props.task.id, props.task)
+    // taskStore.updateTask(props.task.id, props.task.description)
+}
+const doneEdit = async () =>{
+    editMode.value= false;
+    
+    // await updateTask()
+    await updateTask(props.task.id, taskEdited.value)
+    taskStore.updateTask(props.task.id, taskEdited.value)
+    
+}
 
 </script>
 <style scoped>

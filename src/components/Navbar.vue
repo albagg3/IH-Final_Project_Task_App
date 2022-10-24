@@ -17,11 +17,12 @@
             <div class="navbar-end">
                 <div class="navbar-item">
                     <div class="buttons">
-                        <button @click="onClick" class="button is-danger">Log Out</button>
+                        <button @click="onDeletebutton" class="button is-danger">Log Out</button>
                     </div>
                 </div>
             </div>
         </div>
+        <Modalquestion @Yes="onClick" @No="onDeletebutton"  :modal="modal" />
         <Message class="abs" v-if="hasMessage.isShow" :message="hasMessage.message" :type="hasMessage.type"/>
     </nav>
     
@@ -32,7 +33,7 @@ import {ref} from 'vue'
 import { useAuthStore } from '../store/auth'
 import { useRouter } from 'vue-router'
 import Message from './Message.vue';
-
+import Modalquestion from './Modalquestion.vue';
 const authStore = useAuthStore();
 const router = useRouter();
 const hasMessage = ref({
@@ -41,8 +42,25 @@ const hasMessage = ref({
     isShow: false
 })
 
+const props = defineProps({
+    task: Object
+});
 
+// ------------LOG OUT MODAL---------------
+const modal=ref( {
+    message: '¿Quieres salir de la aplicación?',
+    isShow:false
+})
+
+const onDeletebutton = ()=>{
+    modal.value.isShow = !modal.value.isShow;
+    console.log(modal.value.isShow)
+
+}
+
+// ------------LOG OUT MESSAGE---------------
 const onClick = async () => {
+    modal.value.isShow = !modal.value.isShow;
     const response = await logOut();
     if (response === false) {
         hasMessage.value.message = 'Ha habido un error intentelo de nuevo más tarde'

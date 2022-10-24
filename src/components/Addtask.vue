@@ -64,6 +64,8 @@ const addTaskBoard = async () => {
     console.log('entra',task.value)
     await newTask(task.value);            //añade la task a supabase
     await taskBoard();//vuelve a pedir las tareas a supabase
+    task.value.description = '';
+    task.value.title= '';
 }
 
 

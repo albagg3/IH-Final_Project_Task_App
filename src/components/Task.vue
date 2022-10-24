@@ -25,7 +25,8 @@
         <!-- <Messagequestion  @Yes="deleteTaskBoard" @No="cancelDelete" v-if="modal.isShow" :message="message.message"/> -->
     </div>
     <div v-else>
-        <header class="card-header">
+        <Modaledit @Done="doneEdit" @Cancel="cancelEdit" :modal="modal" :taskEdited="taskEdited"/>
+        <!-- <header class="card-header">
             <input v-model="taskEdited.title" class="input is-primary">
             <button class="card-header-icon" aria-label="more options">
                 <span class="icon">
@@ -38,8 +39,8 @@
         </div>
         <footer class="card-footer">
             <a @click="doneEdit" href="#" class="card-footer-item">Done</a>
-            <a @click="onDeletebutton" href="#" class="card-footer-item">Cancel</a>
-        </footer>
+            <a @click="cancelEdit" href="#" class="card-footer-item">Cancel</a>
+        </footer> -->
     </div>
 </template>
 <script setup>
@@ -47,8 +48,8 @@ import {ref} from 'vue'
 import {useTaskStore} from '../store/index'
 import {deleteTask, updateTask} from '../api/index'
 import Modalquestion from './Modalquestion.vue';
-import Message from './Message.vue';
-import Messagequestion from './Messagequestion.vue';
+import Modaledit from './Modaledit.vue';
+
 
 const taskStore = useTaskStore();
 const editMode = ref(false);
@@ -63,10 +64,7 @@ const modal=ref( {
     isShow:false
 })
 
-const message = ref( {
-    message: '¿Estás seguro?',
-    isShow:false
-})
+
 
 const taskEdited = ref({
     title: props.task.title,

@@ -27,7 +27,7 @@ const routes = [
 
 const router = createRouter({
     history: createWebHashHistory(import.meta.env.BASE_URL),//para que desde githubpages sepa que tiene que empezar desde el repositorio 
-    routes
+    routes,
 })
 
 export default router;

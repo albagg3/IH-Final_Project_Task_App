@@ -20,12 +20,12 @@
 <script setup>
 import { defineEmits } from 'vue';
 
-const emits = defineEmits(['Yes', 'No'])
+const emits = defineEmits(['yes', 'no'])
 const onYes = () => {
-    emits('Yes')
+    emits('yes')
 }
 const onNo = () => {
-    emits('No')
+    emits('no')
 }
 const props = defineProps({
     modal: Object

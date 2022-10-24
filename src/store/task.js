@@ -26,7 +26,7 @@ export const useTaskStore = defineStore('task', {
                 ...this.tasks[index],
                 ...taskedit
             }
-            console.log('esta aqui en el store',this.tasks[index].description)
+            console.log('esta aqui en el store',this.tasks[index].isDone)
 
 
             
@@ -48,4 +48,13 @@ export const useTaskStore = defineStore('task', {
 
     
     },
+    // persist: {
+    //     enabled: true,
+    //     strategies:[
+    //         {
+    //             key: 'login',
+    //             storage: localStorage,
+    //         },
+    //     ],
+    // },
 })

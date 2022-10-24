@@ -82,6 +82,14 @@ export const updateTask = async (taskId, task) => {
     //TODO Identificar el resultado y retornar lo que nos interesa por ejemplo true si ha ido bien y false si ha fallaado
 }
 
+export const updateTaskDone = async (taskId, isDone) => {
+    const response = await supabase
+        .from('task')
+        .update({ isDone: isDone })
+        .eq('id', taskId)
+    console.log(response);
+    //TODO Identificar el resultado y retornar lo que nos interesa por ejemplo true si ha ido bien y false si ha fallaado
+}
 
 export const deleteTask = async (taskId) => {
     const response = await supabase

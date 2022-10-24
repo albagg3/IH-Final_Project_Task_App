@@ -22,7 +22,7 @@
                 </div>
             </div>
         </div>
-        <Modalquestion @Yes="onClick" @No="onDeletebutton"  :modal="modal" />
+        <Modalquestion @yes="onClick" @no="onDeletebutton"  :modal="modal" />
         <Message class="abs" v-if="hasMessage.isShow" :message="hasMessage.message" :type="hasMessage.type"/>
     </nav>
     

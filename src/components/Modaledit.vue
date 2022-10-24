@@ -29,12 +29,12 @@
 <script setup>
 import { defineEmits } from 'vue';
 
-const emits = defineEmits(['Done', 'Cancel'])
+const emits = defineEmits(['done', 'cancel'])
 const onDone = () => {
-    emits('Done')
+    emits('done')
 }
 const onCancel = () => {
-    emits('Cancel')
+    emits('cancel')
 }
 const props = defineProps({
     modal: Object,

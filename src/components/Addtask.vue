@@ -29,6 +29,7 @@ import { newTask, getTasks } from '../api/index'
 import { useAuthStore, useTaskStore } from '../store/index'
 import Task from '../components/Task.vue'
 
+
 const authStore = useAuthStore();
 const taskStore = useTaskStore();
 const addTask = ref(false)
@@ -52,6 +53,7 @@ const closeTask = () => {
 // LA LLAMAMOS EN EL ONMOUNTED PARA QUE NOS MUESTRE EL TABLON DE TAREAS
 //se tiene que  ejecutar cuando el componente se monte porque es el tablero con las tareas
 const taskBoard = async () => {
+    
     const response = await getTasks();
     taskStore.setTask(response)   //añade la task al array del store
     console.log(response)
@@ -61,6 +63,7 @@ const taskBoard = async () => {
 //AÑADE UNA TAREA Y NOS ACTUALIZA EL TABLON DE TASKS
 //cuando clickamos en el done, nos añade la tarea al array del store y al del supabase
 const addTaskBoard = async () => {
+  
     console.log('entra',task.value)
     await newTask(task.value);            //añade la task a supabase
     await taskBoard();//vuelve a pedir las tareas a supabase

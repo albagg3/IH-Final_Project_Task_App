@@ -10,13 +10,22 @@
                 {{props.message}}
             </section>
             <footer class="modal-card-foot">
-                <button class="button is-success">yes</button>
-                <button class="button">No</button>
+                <button @click="onYes" class="button is-success">yes</button>
+                <button @click="onNo" class="button">No</button>
             </footer>
         </div>
     </div>
 </template>
 <script setup>
+import{defineEmits} from 'vue';
+
+const emits = defineEmits(['Yes','No'])
+const onYes=()=>{
+    emits('Yes')
+}
+const onNo=()=>{
+    emits('No')
+}
 const props = defineProps({
     message: String
     

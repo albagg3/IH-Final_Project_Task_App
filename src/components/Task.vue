@@ -19,9 +19,10 @@
         <footer class="card-footer">
             <a href="#" class="card-footer-item">Done</a>
             <a @click="editTaskBoard" href="#" class="card-footer-item">Edit</a>
-            <a @click="deleteTaskBoard" href="#" class="card-footer-item">Delete</a>
+            <a @click="onDeletebutton" href="#" class="card-footer-item">Delete</a>
         </footer>
-        <Modalquestion v-if="modal.isShow" :mesagge="modal.message"/>
+        <Modalquestion @Yes="deleteTaskBoard" v-if="modal.isShow" :mesagge="modal.message"/>
+        <!-- <Message  v-if="modal.isShow" :mesagge="message.message"/> -->
     </div>
     <div v-else>
         <header class="card-header">
@@ -46,6 +47,7 @@ import {ref} from 'vue'
 import {useTaskStore} from '../store/index'
 import {deleteTask, updateTask} from '../api/index'
 import Modalquestion from './Modalquestion.vue';
+import Message from './Message.vue';
 
 const taskStore = useTaskStore();
 const editMode = ref(false);
@@ -54,10 +56,16 @@ const props = defineProps({
     task: Object
 });
 
+
 const modal=ref( {
     message: '¿Estás seguro?',
     isShow:false
 })
+
+// const message=ref( {
+//     message: '¿Estás seguro?',
+//     isShow:false
+// })
 
 const taskEdited = ref({
     title: props.task.title,
@@ -65,9 +73,13 @@ const taskEdited = ref({
 })
 //--------------BORRAR TASKS---------------
 // console.log(props.task.id)
-const deleteTaskBoard =async () => { 
+const onDeletebutton = ()=>{
     modal.value.isShow= true;
     console.log(modal.value.isShow)
+
+}
+
+const deleteTaskBoard =async () => { 
     taskStore.deleteTask(props.task.id)
     await deleteTask(props.task.id)
 }

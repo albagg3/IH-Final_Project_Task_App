@@ -1,0 +1,1 @@
+import{o as a,c as t,d as o,t as r,B as c}from"./file_index.1ea8e408.js";const n={class:"message-body"},l={__name:"Message",props:{message:String,type:String},setup(e){const s=e;return(p,i)=>(a(),t("article",{class:c(["message",[s.type]])},[o("div",n,r(s.message),1)],2))}};export{l as _};

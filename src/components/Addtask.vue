@@ -61,6 +61,7 @@ const taskBoard = async () => {
 //AÑADE UNA TAREA Y NOS ACTUALIZA EL TABLON DE TASKS
 //cuando clickamos en el done, nos añade la tarea al array del store y al del supabase
 const addTaskBoard = async () => {
+    console.log('entra',task.value)
     await newTask(task.value);            //añade la task a supabase
     await taskBoard();//vuelve a pedir las tareas a supabase
 }

@@ -6,6 +6,7 @@ export default defineConfig({
   plugins: [vue()],
   //Es la carpeta a la que vamos a avincular del github pages
   //carpeta donde creara el build
+  base: process.env.NODE_ENV === 'production' ? '/IH-Final_Project/' : '/',
   build: { 
     outDir: 'docs',
     rollupOptions: {

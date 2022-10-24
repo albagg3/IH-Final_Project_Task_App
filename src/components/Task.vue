@@ -21,8 +21,8 @@
             <a @click="editTaskBoard" href="#" class="card-footer-item">Edit</a>
             <a @click="onDeletebutton" href="#" class="card-footer-item">Delete</a>
         </footer>
-        <Modalquestion @Yes="deleteTaskBoard" v-if="modal.isShow" :mesagge="modal.message"/>
-        <!-- <Message  v-if="modal.isShow" :mesagge="message.message"/> -->
+        <Modalquestion @Yes="deleteTaskBoard" @No="onDeletebutton"  :modal="modal" />
+        <!-- <Messagequestion  @Yes="deleteTaskBoard" @No="cancelDelete" v-if="modal.isShow" :message="message.message"/> -->
     </div>
     <div v-else>
         <header class="card-header">
@@ -38,7 +38,7 @@
         </div>
         <footer class="card-footer">
             <a @click="doneEdit" href="#" class="card-footer-item">Done</a>
-            <a @click="cancelEdit" href="#" class="card-footer-item">Cancel</a>
+            <a @click="onDeletebutton" href="#" class="card-footer-item">Cancel</a>
         </footer>
     </div>
 </template>
@@ -48,6 +48,7 @@ import {useTaskStore} from '../store/index'
 import {deleteTask, updateTask} from '../api/index'
 import Modalquestion from './Modalquestion.vue';
 import Message from './Message.vue';
+import Messagequestion from './Messagequestion.vue';
 
 const taskStore = useTaskStore();
 const editMode = ref(false);
@@ -62,10 +63,10 @@ const modal=ref( {
     isShow:false
 })
 
-// const message=ref( {
-//     message: '¿Estás seguro?',
-//     isShow:false
-// })
+const message = ref( {
+    message: '¿Estás seguro?',
+    isShow:false
+})
 
 const taskEdited = ref({
     title: props.task.title,
@@ -74,16 +75,21 @@ const taskEdited = ref({
 //--------------BORRAR TASKS---------------
 // console.log(props.task.id)
 const onDeletebutton = ()=>{
-    modal.value.isShow= true;
+    modal.value.isShow = !modal.value.isShow;
     console.log(modal.value.isShow)
 
 }
 
+
 const deleteTaskBoard =async () => { 
+    modal.value.isShow = !modal.value.isShow;
     taskStore.deleteTask(props.task.id)
     await deleteTask(props.task.id)
 }
 
+// const cancelDelete = () => {
+//     modal.value.isShow= false;
+// }
 //---------------EDITAR TASKS--------------
 
 const editTaskBoard = () => {

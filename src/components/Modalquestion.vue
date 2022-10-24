@@ -1,13 +1,14 @@
 <template>
-    <div class="modal">
-        <div class="modal-background"></div>
-        <div class="modal-card">
+    <div class="modal" :class="props.modal.isShow ? 'is-active' : ' '">
+        <div  @click="onNo" class="modal-background"></div>
+        <div class="modal-card ">
             <header class="modal-card-head">
-                
-                <button class="delete" aria-label="close"></button>
+
+                <button @click="onNo" class="delete" aria-label="close"></button>
             </header>
             <section class="modal-card-body">
-                {{props.message}}
+                hola caracola
+                {{props.modal.message}}
             </section>
             <footer class="modal-card-foot">
                 <button @click="onYes" class="button is-success">yes</button>
@@ -17,20 +18,21 @@
     </div>
 </template>
 <script setup>
-import{defineEmits} from 'vue';
+import { defineEmits } from 'vue';
 
-const emits = defineEmits(['Yes','No'])
-const onYes=()=>{
+const emits = defineEmits(['Yes', 'No'])
+const onYes = () => {
     emits('Yes')
 }
-const onNo=()=>{
+const onNo = () => {
     emits('No')
 }
 const props = defineProps({
-    message: String
-    
-    
+    modal: Object
+
 });
+
+
 </script>
 <style scoped>
 

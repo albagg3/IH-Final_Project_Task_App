@@ -19,11 +19,18 @@ export const formatRelativeTime = (date) => {
     let diff = Math.floor(new Date(date) - new Date());
     if (diff > 0) diff = 0
     const { seconds, minutes, hours, days } = getTimesFormat(diff);
-    const formatter = new Intl.RelativeTimeFormat('es-ES', {
+    const formatter = new Intl.RelativeTimeFormat('en-EN', {
         numeric: 'auto',
     })
     if (seconds > -60) return formatter.format(seconds, 'seconds')
     if (minutes > -60) return formatter.format(minutes, 'minutes')
     if (hours > -24) return formatter.format(hours, 'hours')
     return formatter.format(days, 'days')
+}
+
+
+export const percentageDone = (nTask, nTaskdone) =>{
+    let percentage = 0;
+    percentage = nTaskdone * 100 / nTask
+    return percentage
 }

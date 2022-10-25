@@ -1,5 +1,5 @@
 <template>
-    <div v-if="!editMode" class="card" :class="taskEdited.isDone ? 'is-done' : ''" > 
+    <div v-if="!editMode" class="card" :class="props.task.isDone ? 'is-done' : ''" > 
         <header class="card-header">
             <p class="card-header-title ">
                 Task # {{props.task.title}}
@@ -12,6 +12,7 @@
         </header>
         <div class="card-content ">
             <div class="content">
+                
                 {{props.task.description}}
                 <div>
                     <time datetime="2016-1-1">{{relativeTime}}</time>
@@ -61,7 +62,7 @@ const taskEdited = ref({
     
 })
 
-console.log('valor', props.task.id, taskEdited.value )
+console.log('valor taskstore',  taskStore.tasks)
 const relativeTime = formatRelativeTime(props.task.created_at);
 
 //--------------BORRAR TASKS---------------

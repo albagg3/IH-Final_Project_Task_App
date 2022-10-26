@@ -1,0 +1,22 @@
+:root, :root.light {
+    --bg-color: white;
+    --bg-navbar: #eff0ec;
+    --text-color: #3a3838;
+    --text-color-secondary: rgb(163, 162, 162);
+    --button-bar: #dad6be;
+    --button-danger: #ae5264;
+}
+
+:root.dark {
+    --bg-color: #292929;
+    --bg-navbar: rgb(80, 76, 76);
+    --text-color: white;
+    --text-color-secondary: rgb(163, 162, 162);
+    --button-bar:  rgb(163, 162, 162);
+    --button-danger: #ae5264;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}

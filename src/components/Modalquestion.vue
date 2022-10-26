@@ -7,12 +7,11 @@
                 <button @click="onNo" class="delete" aria-label="close"></button>
             </header>
             <section class="modal-card-body">
-                hola caracola
                 {{props.modal.message}}
             </section>
             <footer class="modal-card-foot">
                 <button @click="onYes" class="button is-success">yes</button>
-                <button @click="onNo" class="button">No</button>
+                <button @click="onNo" class="button is-danger">No</button>
             </footer>
         </div>
     </div>

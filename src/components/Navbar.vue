@@ -1,5 +1,6 @@
 <template>
-    <nav class="navbar rel" role="navigation" aria-label="main navigation">
+    <div >
+    <nav class="navbar rel section pb-0 pt-0" role="navigation" aria-label="main navigation ">
         <div class="navbar-brand">
             <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false"
                 data-target="navbarBasicExample">
@@ -17,6 +18,7 @@
             <div class="navbar-end">
                 <div class="navbar-item">
                     <div class="buttons">
+                        <button @click="onDarkMode" class="button">Dark</button>
                         <button @click="onDeletebutton" class="button is-danger">Log Out</button>
                     </div>
                 </div>
@@ -25,16 +27,17 @@
         <Modalquestion @yes="onClick" @no="onDeletebutton"  :modal="modal" />
         <Message class="abs" v-if="hasMessage.isShow" :message="hasMessage.message" :type="hasMessage.type"/>
     </nav>
-    
+</div>
 </template>
 <script setup>
 import { logOut } from '../api/index'
 import {ref} from 'vue'
-import { useAuthStore } from '../store/auth'
+import { useAuthStore, useThemeStore } from '../store/index'
 import { useRouter } from 'vue-router'
 import Message from './Message.vue';
 import Modalquestion from './Modalquestion.vue';
 const authStore = useAuthStore();
+const themeStore = useThemeStore();
 const router = useRouter();
 const hasMessage = ref({
     message: '',
@@ -79,8 +82,21 @@ const onClick = async () => {
     }
 };
 
+//------DARKMODE------
+const onDarkMode = () =>{
+    themeStore.isTheme = !themeStore.isTheme;
+    themeStore.loadTheme();
+}
+
 </script>
 <style scoped>
+nav{
+    position: sticky;
+    top:0px;
+    color: var(--text-color);
+    
+}
+
 .abs{
 position:absolute;
 left: 50%;

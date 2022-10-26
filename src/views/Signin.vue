@@ -4,17 +4,17 @@
         <form @submit.prevent="onSubmit">
             <div class="p-2">
                 <label for="">Email</label>
-                <input v-model="email" class="input is-primary" type="email" placeholder="Email">
+                <input v-model="email" class="input is-success" type="email" placeholder="Email">
             </div>
             <div class="p-2">
                 <label for="">Password</label>
-                <input v-model="password" class="input is-primary" type="password" placeholder="Password">
+                <input v-model="password" class="input is-success" type="password" placeholder="Password">
             </div>
             <div class="p-2">
                 <label for="">Confirm password</label>
-                <input v-model="passwordConfirm" class="input is-primary" type="password" placeholder="Password">
+                <input v-model="passwordConfirm" class="input is-success" type="password" placeholder="Password">
             </div>
-            <button class="button is-primary" type="submit">Sign in</button>
+            <button class="button is-success" type="submit">Sign in</button>
 
             <Message v-if="hasMessage.isShow" :message="hasMessage.message" :type="hasMessage.type" />
             <div>

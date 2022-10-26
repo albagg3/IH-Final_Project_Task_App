@@ -1,6 +1,6 @@
 <template>
-    <div class="">
-        <Navbar />
+    <div >
+        <Navbar  />
         <Addtask />
         <Footer />
     </div>

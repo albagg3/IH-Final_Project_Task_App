@@ -8,7 +8,7 @@
             </header>
             <section class="modal-card-body">
                 <header class="card-header">
-                    <input v-model="props.taskEdited.title" class="input is-primary">
+                    <input v-model="props.taskEdited.title" class="input is-success">
                     <button class="card-header-icon" aria-label="more options">
                         <span class="icon">
                             <i class="fas fa-angle-down" aria-hidden="true"></i>
@@ -16,12 +16,12 @@
                     </button>
                 </header>
                 <div class="card-content">
-                    <input v-model="props.taskEdited.description" class="input is-primary">
+                    <input v-model="props.taskEdited.description" class="input is-success">
                 </div>
             </section>
             <footer class="modal-card-foot">
                 <button @click="onDone" class="button is-success">Done</button>
-                <button @click="onCancel" class="button">Cancel</button>
+                <button @click="onCancel" class="button is-danger">Cancel</button>
             </footer>
         </div>
     </div>

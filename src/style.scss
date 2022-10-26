@@ -1,0 +1,71 @@
+// @import "https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css";
+
+// body{
+//     height: 100vh;
+// }
+
+@charset "utf-8";
+
+
+$success:#9F9B7C;
+$danger: #AE5264;
+
+
+//--------NAVBAR---------
+$navbar-background-color:var(--bg-navbar);
+$navbar-item-color: var(--text-color);
+// -------INPUT----------
+$input-background-color:var(--bg-navbar);
+$input-border-color:var(--bg-navbar);
+// -------CARD----------
+$card-background-color: var(--bg-navbar);
+$card-color: var(--text-color);
+$card-header-color:var(--text-color);
+// -------MODAL----------
+$modal-card-body-background-color:var(--bg-color);
+$modal-card-head-background-color: var(--bg-navbar);
+// -------PROGRES-BAR----------
+$progress-value-background-color:var(--button-bar);
+$progress-bar-background-color:var(--bg-navbar);
+// -------FOOTER----------
+$footer-background-color:var(--bg-navbar);
+
+// -------BUTTON----------
+$button-background-color:var(--button-bar);
+
+
+
+
+$linkedin: #0077b5;
+$linkedin-invert: findColorInvert($linkedin);
+$twitter: #55acee;
+$twitter-invert: findColorInvert($twitter);
+$github: #333;
+$github-invert: findColorInvert($github);
+
+$darkmode:rgb(85, 78, 78);
+$darkmode-invert:white;
+
+$addColors: (
+  "darkmode":($darkmode, $darkmode-invert),
+  "twitter":($twitter, $twitter-invert),
+  "linkedin": ($linkedin, $linkedin-invert),
+  "github": ($github, $github-invert)
+);
+@import "../node_modules/bulma/sass/utilities/derived-variables";
+$colors: map-merge($colors, $addColors);
+
+
+// Import only what you need from Bulma
+@import "../node_modules/bulma/sass/utilities/_all.sass";
+@import "../node_modules/bulma/sass/base/_all.sass";
+@import "../node_modules/bulma/sass/elements/button.sass";
+@import "../node_modules/bulma/sass/elements/container.sass";
+@import "../node_modules/bulma/sass/elements/title.sass";
+@import "../node_modules/bulma/sass/form/_all.sass";
+@import "../node_modules/bulma/sass/components/navbar.sass";
+@import "../node_modules/bulma/sass/layout/hero.sass";
+@import "../node_modules/bulma/sass/layout/section.sass";
+@import "bulma/bulma.sass";
+
+@import "./theme.scss"

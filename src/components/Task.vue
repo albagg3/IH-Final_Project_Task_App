@@ -1,6 +1,6 @@
 <template>
     <div v-if="!editMode" class="card" :class="props.task.isDone ? 'is-done' : ''" > 
-        <header class="card-header">
+        <header class="card-header ">
             <p class="card-header-title ">
                 Task # {{props.task.title}}
             </p>
@@ -119,7 +119,7 @@ const taskDone = async () => {
 </script>
 <style scoped>
 .is-done {
-    background-color:rgb(197, 197, 197);
+    background-color:var(--button-bar);
     text-decoration: line-through;
 }
 </style>

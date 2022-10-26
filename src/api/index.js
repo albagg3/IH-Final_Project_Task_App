@@ -78,7 +78,7 @@ export const updateTask = async (taskId, task) => {
         .from('task')
         .update(task)
         .eq('id', taskId)
-    console.log(response);
+    console.log(task);
     //TODO Identificar el resultado y retornar lo que nos interesa por ejemplo true si ha ido bien y false si ha fallaado
 }
 

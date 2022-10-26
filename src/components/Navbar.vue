@@ -18,7 +18,10 @@
             <div class="navbar-end">
                 <div class="navbar-item">
                     <div class="buttons">
-                        <button @click="onDarkMode" class="button">Dark</button>
+                        <button @click="onDarkMode" class="button">
+                            <i v-if="!moon" class="fa-solid fa-moon"></i>
+                            <i v-if="moon" class="fa-solid fa-sun"></i>
+                        </button>
                         <button @click="onDeletebutton" class="button is-danger">Log Out</button>
                     </div>
                 </div>
@@ -44,6 +47,8 @@ const hasMessage = ref({
     type: '',
     isShow: false
 })
+
+const moon = ref(false)
 
 const props = defineProps({
     task: Object
@@ -84,6 +89,7 @@ const onClick = async () => {
 
 //------DARKMODE------
 const onDarkMode = () =>{
+    moon.value = !moon.value
     themeStore.isTheme = !themeStore.isTheme;
     themeStore.loadTheme();
 }

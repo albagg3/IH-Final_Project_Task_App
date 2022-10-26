@@ -7,16 +7,14 @@
                 <button @click="onCancel" class="delete" aria-label="close"></button>
             </header>
             <section class="modal-card-body">
-                <header class="card-header">
+                <header class="card-content">
+                    <label for=""><strong>Task name</strong></label>
                     <input v-model="props.taskEdited.title" class="input is-success">
-                    <button class="card-header-icon" aria-label="more options">
-                        <span class="icon">
-                            <i class="fas fa-angle-down" aria-hidden="true"></i>
-                        </span>
-                    </button>
                 </header>
                 <div class="card-content">
-                    <input v-model="props.taskEdited.description" class="input is-success">
+                    <label for=""><strong>Task description</strong></label>
+                    <textarea v-model="props.taskEdited.description" class="input is-success" type="text"
+                    placeholder="Task"> </textarea>
                 </div>
             </section>
             <footer class="modal-card-foot">

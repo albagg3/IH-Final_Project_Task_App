@@ -7,8 +7,10 @@
 @charset "utf-8";
 
 
-$success:#9F9B7C;
-$danger: #AE5264;
+// $success:#9F9B7C;
+// $danger: #AE5264;
+$success:#e4f986;
+$danger: #cf6679;
 
 
 //--------NAVBAR---------
@@ -25,7 +27,7 @@ $card-header-color:var(--text-color);
 $modal-card-body-background-color:var(--bg-color);
 $modal-card-head-background-color: var(--bg-navbar);
 // -------PROGRES-BAR----------
-$progress-value-background-color:var(--button-bar);
+$progress-value-background-color:#d0ec56;
 $progress-bar-background-color:var(--bg-navbar);
 // -------FOOTER----------
 $footer-background-color:var(--bg-navbar);
@@ -68,4 +70,5 @@ $colors: map-merge($colors, $addColors);
 @import "../node_modules/bulma/sass/layout/section.sass";
 @import "bulma/bulma.sass";
 
-@import "./theme.scss"
+
+@import "./theme.scss";

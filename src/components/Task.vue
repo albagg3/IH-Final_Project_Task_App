@@ -2,13 +2,8 @@
     <div v-if="!editMode" class="card" :class="props.task.isDone ? 'is-done' : ''" > 
         <header class="card-header ">
             <p class="card-header-title ">
-                Task # {{props.task.title}}
+                Task: {{props.task.title}}
             </p>
-            <button class="card-header-icon" aria-label="more options">
-                <span class="icon">
-                    <i class="fas fa-angle-down" aria-hidden="true"></i>
-                </span>
-            </button>
         </header>
         <div class="card-content ">
             <div class="content">
@@ -19,10 +14,19 @@
                 </div>
             </div>
         </div>
-        <footer class="card-footer">
-            <a @click="taskDone" href="#" class="card-footer-item">Done</a>
-            <a @click="editTaskBoard" href="#" class="card-footer-item">Edit</a>
-            <a @click="onDeletebutton" href="#" class="card-footer-item">Delete</a>
+        <footer v-if="!props.task.isDone"  class="card-footer">
+            <!-- <a @click="taskDone" href="#" class="card-footer-item">Done</a> -->
+            <i @click="taskDone" class="fa-solid fa-square-check card-footer-item"></i>
+            <!-- <a @click="editTaskBoard" href="#" class="card-footer-item">Edit</a> -->
+            <i @click="editTaskBoard" class="fa-regular fa-pen-to-square card-footer-item"></i>
+            <!-- <a @click="onDeletebutton" href="#" class="card-footer-item">Delete</a> -->
+            <i @click="onDeletebutton" class="fa-solid fa-trash card-footer-item"></i>
+        </footer>
+        <footer v-if="props.task.isDone"  class="card-footer">
+            <!-- <a @click="taskDone" href="#" class="card-footer-item">Done</a> -->
+            <i @click="taskDone" class="fa-solid fa-rotate-right card-footer-item"></i>
+            <!-- <a @click="onDeletebutton" href="#" class="card-footer-item">Delete</a> -->
+            <i @click="onDeletebutton" class="fa-solid fa-trash card-footer-item"></i>
         </footer>
         <Modalquestion @yes="deleteTaskBoard" @no="onDeletebutton" :modal="modal" />
         <!-- <Messagequestion  @Yes="deleteTaskBoard" @No="cancelDelete" v-if="modal.isShow" :message="message.message"/> -->
@@ -38,12 +42,14 @@ import { useTaskStore } from '../store/index'
 import { deleteTask, updateTask, updateTaskDone } from '../api/index'
 import Modalquestion from './Modalquestion.vue';
 import Modaledit from './Modaledit.vue';
-import { formatRelativeTime } from '../helpers/index'
+import { formatRelativeTime, percentageDone} from '../helpers/index'
+
 
 //--------------VARIABLES---------------
 const taskStore = useTaskStore();
 const editMode = ref(false);
-
+// const tasksDone = ref([])
+const done = ref(false)
 const props = defineProps({
     task: Object
 });
@@ -76,6 +82,7 @@ const deleteTaskBoard = async () => {
     modal.value.isShow = !modal.value.isShow;
     taskStore.deleteTask(props.task.id)
     await deleteTask(props.task.id)
+    // progressBar();
 }
 
 //---------------EDITAR TASKS--------------
@@ -96,7 +103,7 @@ const cancelEdit = async () => {
 }
 const doneEdit = async () => {
     editMode.value = false;
-
+    
     // await updateTask()
     await updateTask(props.task.id, taskEdited.value)
     taskStore.updateTask(props.task.id, taskEdited.value)
@@ -105,15 +112,26 @@ const doneEdit = async () => {
 
 //---------------MARCAR TASK DONE--------------
 const taskDone = async () => {
+    
     taskEdited.value.isDone = !taskEdited.value.isDone
+    done.value = !done.value
     await updateTaskDone(props.task.id, taskEdited.value.isDone)
     taskStore.updateTask(props.task.id, taskEdited.value)
-    console.log('valor', props.task.id,  taskEdited.value  )
+    console.log('valor', props.task.id,  taskEdited.value)
+    // progressBar();
 
 }
 
+//-----PROGRESSBAR-----------
+// const filterDone = () => {
+//     tasksDone.value = taskStore.tasks.filter(task => task.isDone === true)
+//     console.log('done tasks', tasksDone.value)
+// }
 
-
+// const progressBar = () => {
+//     filterDone();
+//     progress.value = percentageDone(taskStore.tasks.length, tasksDone.value.length)
+// }
 
 
 </script>

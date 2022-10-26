@@ -1,5 +1,5 @@
 <template>
-    <div class="section">
+    <div class="section wholepage">
         <button  @click="openTask" class="button is-success">Add new task</button>
         <div>
             <progress class="progress mt-2 mb-2" :value="progress" max="100">15%</progress>
@@ -139,5 +139,7 @@ onMounted(async () => {
 
 </script>
 <style scoped>
-
+.wholepage{
+    min-height: calc(100vh - 224px);
+}
 </style>

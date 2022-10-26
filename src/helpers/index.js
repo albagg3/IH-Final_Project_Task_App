@@ -34,3 +34,5 @@ export const percentageDone = (nTask, nTaskdone) =>{
     percentage = nTaskdone * 100 / nTask
     return percentage
 }
+
+

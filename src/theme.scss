@@ -1,9 +1,16 @@
+@import "https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css";
+@import "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css";
+
 :root, :root.light {
     --bg-color: white;
-    --bg-navbar: #eff0ec;
+     --bg-navbar: #eff0ec;
+    
+    
     --text-color: #3a3838;
-    --text-color-secondary: rgb(163, 162, 162);
-    --button-bar: #dad6be;
+    
+    //  --button-bar: #dad6be;
+     --button-bar: #c4c3bf;
+    
     --button-danger: #ae5264;
 }
 

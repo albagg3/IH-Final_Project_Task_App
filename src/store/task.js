@@ -13,7 +13,10 @@ export const useTaskStore = defineStore('task', {
     actions: {
         setTask(task) {
             
-            this.tasks = task 
+            this.tasks = task.map((t)=>({
+                ...t,
+                // description: atob(t.description)
+            })) 
             //TODO guardar en el state las tasks que nos de supabase
             //como supabase no nos da el id de la task no podemos hacer un push
             //sino que igualamos al array que nos devuelve

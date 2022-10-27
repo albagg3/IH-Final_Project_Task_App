@@ -1,6 +1,6 @@
 <template>
     <div class="flex ">
-        <h1>INICIA SESION</h1>
+        <h1>LOG IN</h1>
         <form @submit.prevent="onSubmit">
             <div class="p-2">
                 <label for="">Email</label>
@@ -61,6 +61,7 @@ const onSubmit = async () => {
     
     display: flex;
     flex-direction: column;
+    
     
     
 }

@@ -1,18 +1,17 @@
 <template>
-    <div v-if="!editMode" class="card" :class="props.task.isDone ? 'is-done' : ''" > 
-        <header class="card-header ">
+    <div v-if="!editMode" class="card" :class="props.task.isDone ? 'is-done ' : ''" > 
+        <header class="card-header" :class="props.task.isDone ? ' text-done' : ''">
             <p class="card-header-title ">
                 Task: {{props.task.title}}
             </p>
         </header>
-        <div class="card-content ">
-            <div class="content">
-                
+        <div class="card-content " >
+            <div class="content br" :class="props.task.isDone ? ' text-done' : ''"> 
                 {{props.task.description}}
-                <div>
-                    <time datetime="2016-1-1">{{relativeTime}}</time>
-                </div>
             </div>
+                <div >
+                    <time class="time" datetime="2016-1-1">{{relativeTime}}</time>
+                </div>
         </div>
         <footer v-if="!props.task.isDone"  class="card-footer">
             <!-- <a @click="taskDone" href="#" class="card-footer-item">Done</a> -->
@@ -120,12 +119,30 @@ const taskDone = async () => {
     console.log('valor', props.task.id,  taskEdited.value)
    
 
-}
+};
 
 </script>
 <style scoped>
+.text-done{
+    text-decoration: line-through;
+
+}
 .is-done {
     background-color:var(--button-bar);
-    text-decoration: line-through;
+}
+
+.time{
+    
+    color:var(--text-color-secondary);
+}
+
+.card{
+    height:100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.br{
+    white-space:break-spaces;
 }
 </style>

@@ -12,7 +12,7 @@
         <div id="navbarBasicExample" class="navbar-menu">
             <div class="navbar-start">
                 <router-link :to="{name:'home'}" class="navbar-item">
-                    Home
+                    <h1 class="title">AskYourTask</h1>
                 </router-link>
             </div>
             <div class="navbar-end">
@@ -105,7 +105,7 @@ nav{
 
 .abs{
 position:absolute;
-left: 50%;
+left: 60%;
 top:100px;
 }
 .rel{

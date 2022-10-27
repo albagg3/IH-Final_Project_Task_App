@@ -2,9 +2,10 @@
     <div class="section wholepage">
         <button  @click="openTask" class="button is-success">Add new task</button>
         <div>
-            <progress class="progress mt-2 mb-2 " :value="completedTask/totalTask*100" max="100"></progress>
+            <progress class="progress mt-2 mb-2 " :value="completedTask" :max="totalTask"></progress>
         </div>
-        <div :class="bounce ? 'animate__animated animate__bounce' : ''">
+        
+        <div class="animate__animated animate__faster" :class="!bounce ? ' animate__bounceInUp' : 'animate__bounceInDown'">
             {{completedTask}}/{{totalTask}}
         </div>
     <div v-if="!addTask" class="mb-2">
@@ -39,7 +40,7 @@
 </div>
 </template>
 <script setup>
-import { ref, onMounted, computed } from 'vue'
+import { ref, onMounted, computed, watch } from 'vue'
 import { newTask, getTasks } from '../api/index'
 import { useAuthStore, useTaskStore } from '../store/index'
 
@@ -57,6 +58,7 @@ const task = ref({
 
 const bounce= ref(false)
 
+
 // ABRIR Y CERRAR EL INPUT PARA ESCRIBIR TAREA
 const openTask = () => {
     addTask.value = true
@@ -69,11 +71,11 @@ const filter = ref(2)
 
 const tasksComp = computed(()=>{
     if(filter.value === 0)
-        return taskStore.tasks.filter(task => task.isDone === false)
+    return taskStore.tasks.filter(task => task.isDone === false)
     if(filter.value === 1)
-        return taskStore.tasks.filter(task => task.isDone === true)
+    return taskStore.tasks.filter(task => task.isDone === true)
     if(filter.value === 2)
-        return taskStore.tasks
+    return taskStore.tasks
 })
 
 //--TAREAS COMPLETED / TAREAS TOTALES para PROGRESS BAR-----
@@ -82,12 +84,18 @@ const totalTask = computed(()=>{
 })
 
 const completedTask = computed(()=>{
-    bounce.value = !bounce.value
+    // bounce.value = !bounce.value
     const completed = taskStore.tasks.filter(task => task.isDone === true)
     return completed.length
     
 })
 
+
+watch(() => completedTask.value, newValue => {
+        console.log('watch',completedTask.value)
+    bounce.value = !bounce.value
+    
+})
 //----LA LLAMAMOS EN EL ONMOUNTED PARA QUE NOS MUESTRE EL TABLON DE TAREAS---
 //se tiene que  ejecutar cuando el componente se monte porque es el tablero con las tareas
 const taskBoard = async () => {
@@ -101,6 +109,10 @@ const taskBoard = async () => {
 //cuando clickamos en el done, nos añade la tarea al array del store y al del supabase
 const addTaskBoard = async () => {
     addTask.value = false
+    
+    // task.value.description = btoa(task.value.description)
+    // task.value.description = atoa(task.value.description)
+    console.log(task.value.description)
     await newTask(task.value);            //añade la task a supabase
     await taskBoard();//vuelve a pedir las tareas a supabase
     task.value.description = '';

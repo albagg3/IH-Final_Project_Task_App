@@ -2,9 +2,9 @@
     <div class="section wholepage">
         <button  @click="openTask" class="button is-success">Add new task</button>
         <div>
-            <progress class="progress mt-2 mb-2" :value="completedTask/totalTask*100" max="100"></progress>
+            <progress class="progress mt-2 mb-2 " :value="completedTask/totalTask*100" max="100"></progress>
         </div>
-        <div>
+        <div :class="bounce ? 'animate__animated animate__bounce' : ''">
             {{completedTask}}/{{totalTask}}
         </div>
     <div v-if="!addTask" class="mb-2">
@@ -55,7 +55,7 @@ const task = ref({
     description: ''
 })
 
-
+const bounce= ref(false)
 
 // ABRIR Y CERRAR EL INPUT PARA ESCRIBIR TAREA
 const openTask = () => {
@@ -82,6 +82,7 @@ const totalTask = computed(()=>{
 })
 
 const completedTask = computed(()=>{
+    bounce.value = !bounce.value
     const completed = taskStore.tasks.filter(task => task.isDone === true)
     return completed.length
     

@@ -28,8 +28,8 @@ import { login } from '../api/index'
 
 const router = useRouter();
 const authStore = useAuthStore();
-const email = ref('garciagonzalezalba@gmail.com');
-const password = ref('1234567');
+const email = ref('');
+const password = ref('');
 const hasMessage = ref({
     message: '',
     type: '',

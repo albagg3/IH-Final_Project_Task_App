@@ -14,21 +14,15 @@
                 </div>
         </div>
         <footer v-if="!props.task.isDone"  class="card-footer">
-            <!-- <a @click="taskDone" href="#" class="card-footer-item">Done</a> -->
             <i @click="taskDone" class="fa-solid fa-square-check card-footer-item"></i>
-            <!-- <a @click="editTaskBoard" href="#" class="card-footer-item">Edit</a> -->
             <i @click="editTaskBoard" class="fa-regular fa-pen-to-square card-footer-item"></i>
-            <!-- <a @click="onDeletebutton" href="#" class="card-footer-item">Delete</a> -->
             <i @click="onDeletebutton" class="fa-solid fa-trash card-footer-item"></i>
         </footer>
         <footer v-if="props.task.isDone"  class="card-footer">
-            <!-- <a @click="taskDone" href="#" class="card-footer-item">Done</a> -->
             <i @click="taskDone" class="fa-solid fa-rotate-right card-footer-item"></i>
-            <!-- <a @click="onDeletebutton" href="#" class="card-footer-item">Delete</a> -->
             <i @click="onDeletebutton" class="fa-solid fa-trash card-footer-item"></i>
         </footer>
         <Modalquestion @yes="deleteTaskBoard" @no="onDeletebutton" :modal="modal" />
-        <!-- <Messagequestion  @Yes="deleteTaskBoard" @No="cancelDelete" v-if="modal.isShow" :message="message.message"/> -->
     </div>
     <div v-else>
         <Modaledit @done="doneEdit" @cancel="cancelEdit" :modal="modal" :taskEdited="taskEdited" />
@@ -81,7 +75,6 @@ const deleteTaskBoard = async () => {
     modal.value.isShow = !modal.value.isShow;
     taskStore.deleteTask(props.task.id)
     await deleteTask(props.task.id)
- 
 }
 
 //---------------EDITAR TASKS--------------
@@ -102,8 +95,6 @@ const cancelEdit = async () => {
 }
 const doneEdit = async () => {
     editMode.value = false;
-    
-    // await updateTask()
     await updateTask(props.task.id, taskEdited.value)
     taskStore.updateTask(props.task.id, taskEdited.value)
 
@@ -111,13 +102,11 @@ const doneEdit = async () => {
 
 //---------------MARCAR TASK DONE--------------
 const taskDone = async () => {
-    
     taskEdited.value.isDone = !taskEdited.value.isDone
     done.value = !done.value
     await updateTaskDone(props.task.id, taskEdited.value.isDone)
     taskStore.updateTask(props.task.id, taskEdited.value)
     console.log('valor', props.task.id,  taskEdited.value)
-   
 
 };
 
@@ -137,6 +126,7 @@ const taskDone = async () => {
 }
 
 .card{
+    overflow:hidden;
     height:100%;
     display: flex;
     flex-direction: column;

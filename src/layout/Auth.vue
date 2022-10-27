@@ -47,7 +47,7 @@ h1{
     align-items: center;
     text-align: center;
     color:var(--text-color);
-    background-color: var(--bg-navbar);
+    background-color: var(--main-card);
     aspect-ratio:1;
     border-radius:50%;
 

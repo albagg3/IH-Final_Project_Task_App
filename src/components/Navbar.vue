@@ -105,8 +105,8 @@ nav{
 
 .abs{
 position:absolute;
-left: 60%;
-top:100px;
+left:40%;
+top:550%;
 }
 .rel{
     position:relative;

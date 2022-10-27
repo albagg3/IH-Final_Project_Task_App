@@ -1,6 +1,6 @@
 <template>
     <div class="flex ">
-        <h1>LOG IN</h1>
+        <h1 class="title">LOG IN</h1>
         <form @submit.prevent="onSubmit">
             <div class="p-2">
                 <label for="">Email</label>
@@ -57,8 +57,11 @@ const onSubmit = async () => {
 
 </script>
 <style scoped>
+.title{
+    color:#91928caf;
+}
 .flex{
-    
+    padding: 30px;
     display: flex;
     flex-direction: column;
     

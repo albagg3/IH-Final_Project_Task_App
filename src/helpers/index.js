@@ -29,10 +29,6 @@ export const formatRelativeTime = (date) => {
 }
 
 
-export const percentageDone = (nTask, nTaskdone) =>{
-    let percentage = 0;
-    percentage = nTaskdone * 100 / nTask
-    return percentage
-}
+
 
 

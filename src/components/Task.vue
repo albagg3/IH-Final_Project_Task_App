@@ -42,7 +42,7 @@ import { useTaskStore } from '../store/index'
 import { deleteTask, updateTask, updateTaskDone } from '../api/index'
 import Modalquestion from './Modalquestion.vue';
 import Modaledit from './Modaledit.vue';
-import { formatRelativeTime, percentageDone} from '../helpers/index'
+import { formatRelativeTime} from '../helpers/index'
 
 
 //--------------VARIABLES---------------
@@ -82,7 +82,7 @@ const deleteTaskBoard = async () => {
     modal.value.isShow = !modal.value.isShow;
     taskStore.deleteTask(props.task.id)
     await deleteTask(props.task.id)
-    // progressBar();
+ 
 }
 
 //---------------EDITAR TASKS--------------
@@ -118,21 +118,9 @@ const taskDone = async () => {
     await updateTaskDone(props.task.id, taskEdited.value.isDone)
     taskStore.updateTask(props.task.id, taskEdited.value)
     console.log('valor', props.task.id,  taskEdited.value)
-    // progressBar();
+   
 
 }
-
-//-----PROGRESSBAR-----------
-// const filterDone = () => {
-//     tasksDone.value = taskStore.tasks.filter(task => task.isDone === true)
-//     console.log('done tasks', tasksDone.value)
-// }
-
-// const progressBar = () => {
-//     filterDone();
-//     progress.value = percentageDone(taskStore.tasks.length, tasksDone.value.length)
-// }
-
 
 </script>
 <style scoped>

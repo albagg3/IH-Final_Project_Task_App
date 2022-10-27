@@ -14,6 +14,7 @@ const router = useRouter();
 onMounted(async () => {
 
   themeStore.loadTheme()
+  
   if(authStore.isAuth === false)
     router.push({name: 'login'})
   

@@ -1,5 +1,5 @@
 <template>
-    <div class="flex">
+    <div class="flex ">
         <h1>INICIA SESION</h1>
         <form @submit.prevent="onSubmit">
             <div class="p-2">
@@ -61,6 +61,7 @@ const onSubmit = async () => {
     
     display: flex;
     flex-direction: column;
+    
     
 }
 </style>

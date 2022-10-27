@@ -8,11 +8,11 @@
             </header>
             <section class="modal-card-body">
                 <header class="card-content">
-                    <label for=""><strong>Task name</strong></label>
+                    <label class="modal-label" for="">Task name</label>
                     <input v-model="props.taskEdited.title" class="input is-success">
                 </header>
                 <div class="card-content">
-                    <label for=""><strong>Task description</strong></label>
+                    <label class="modal-label"  for="">Task description</label>
                     <textarea v-model="props.taskEdited.description" class="input is-success" type="text"
                     placeholder="Task"> </textarea>
                 </div>
@@ -43,5 +43,8 @@ const props = defineProps({
 
 </script>
 <style scoped>
-
+.modal-label{
+    color:var(--text-color);
+    font-weight: bold;
+    }
 </style>

@@ -11,6 +11,7 @@
 // import { useAuthStore } from '../store/auth'
 // import { useRouter } from 'vue-router'
 // import Message from '../components/Message.vue'
+// we have inserted the necessary components
 import Navbar from '../components/Navbar.vue'
 import Footer from '../components/Footer.vue'
 import Addtask from '../components/Addtask.vue'
